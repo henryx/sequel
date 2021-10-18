@@ -2,6 +2,7 @@ package qubu;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Query {
@@ -30,7 +31,8 @@ public class Query {
      * @return a builder instance of the class
      */
     public static Query from(String... tables) {
-        List<String> tableList = Arrays.asList(tables);
+        List<String> tableList = Arrays.stream(tables).filter(e -> !Objects.equals(e, ""))
+                .collect(Collectors.toList());
 
         return new Query(tableList);
     }
@@ -42,7 +44,8 @@ public class Query {
      * @return a builder instance of the class
      */
     public Query select(String... columns) {
-        this.columns = Arrays.asList(columns);
+        this.columns = Arrays.stream(columns).filter(e -> !Objects.equals(e, ""))
+                .collect(Collectors.toList());
 
         return this;
     }
