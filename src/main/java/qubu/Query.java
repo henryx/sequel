@@ -8,8 +8,8 @@ public class Query {
     private final List<String> from;
     private List<String> columns;
 
-    private Query(String... tables) {
-        this.from = Arrays.asList(tables);
+    private Query(List<String> tables) {
+        this.from = tables;
     }
 
     private String build() {
@@ -30,7 +30,9 @@ public class Query {
      * @return a builder instance of the class
      */
     public static Query from(String... tables) {
-        return new Query(tables);
+        List<String> tableList = Arrays.asList(tables);
+
+        return new Query(tableList);
     }
 
     /**
