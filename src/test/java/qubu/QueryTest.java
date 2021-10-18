@@ -15,4 +15,13 @@ public class QueryTest {
         Assert.assertEquals(q, result);
     }
 
+    @Test
+    public void testEmpty() {
+        String result = "";
+        String q = Query.from("")
+                .select("t1", "t2")
+                .getSql();
+
+        Assert.assertEquals(q, result);
+    }
 }
