@@ -2,16 +2,25 @@ package qubu;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Query {
     private final List<String> from;
+    private List<String> columns;
 
     private Query(String... tables) {
         this.from = Arrays.asList(tables);
     }
 
     private String build() {
-        return "";
+        if (this.from.isEmpty() || this.columns.isEmpty()) {
+            return "";
+        }
+
+        String query = this.columns.stream().collect(Collectors.joining(", ", "SELECT ", " FROM "));
+        query += String.join(", ", this.from);
+
+        return query;
     }
 
     /**
@@ -26,10 +35,12 @@ public class Query {
 
     /**
      * Select add columns in SELECT query
+     *
      * @param columns Sets the columns used to select data
      * @return a builder instance of the class
      */
     public Query select(String... columns) {
+        this.columns = Arrays.asList(columns);
 
         return this;
     }
