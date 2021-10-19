@@ -64,7 +64,7 @@ public class QueryTest {
         String q = Query.from("test")
                 .select("t1", "t2")
                 .where(Criterion.eq("t1", "1"))
-                .where(Criterion.eq("t2", "2"))
+                .where(Criterion.eq("t2", "2").method(Criterion.OR))
                 .getSql();
 
         Assert.assertEquals(q, result);
