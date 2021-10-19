@@ -24,4 +24,18 @@ public class Criterion {
     public static Criterion eq(String col1, String col2) {
         return new Criterion(build(col1, "=", col2));
     }
+
+    /**
+     * getSql returns generated criterion
+     *
+     * @return a String that represents the generated criterion
+     */
+    public String getSql() {
+        return this.criterion;
+    }
+
+    @Override
+    public String toString() {
+        return this.getSql();
+    }
 }
