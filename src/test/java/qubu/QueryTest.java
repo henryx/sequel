@@ -45,4 +45,16 @@ public class QueryTest {
 
         Assert.assertEquals(q, result);
     }
+
+    @Test
+    public void testMultipleEqualityFilter() {
+        String result = "SELECT t1, t2 FROM test WHERE t1 = 1 AND t2 = 2";
+        String q = Query.from("test")
+                .select("t1", "t2")
+                .where(Criterion.eq("t1", "1"))
+                .where(Criterion.eq("t2", "2"))
+                .getSql();
+
+        Assert.assertEquals(q, result);
+    }
 }
