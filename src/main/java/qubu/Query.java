@@ -1,16 +1,16 @@
 package qubu;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Query {
     private final List<String> from;
+    private final List<Criterion> criteria;
     private List<String> columns;
 
     private Query(List<String> tables) {
         this.from = tables;
+        this.criteria = new ArrayList<>();
     }
 
     private String build() {
@@ -20,6 +20,16 @@ public class Query {
 
         String query = this.columns.stream().collect(Collectors.joining(", ", "SELECT ", " FROM "));
         query += String.join(", ", this.from);
+
+        if (!this.criteria.isEmpty()) {
+            StringJoiner joiner = new StringJoiner(" ", " ", "").add("WHERE");
+            for (Criterion criterion : this.criteria) {
+                String sql = criterion.getSql();
+                joiner.add(sql);
+            }
+
+            query += joiner.toString();
+        }
 
         return query;
     }
@@ -42,7 +52,9 @@ public class Query {
      *
      * @return a builder instance of the class
      */
-    public Query where() {
+    public Query where(Criterion criterion) {
+        this.criteria.add(criterion);
+
         return this;
     }
 
