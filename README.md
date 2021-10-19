@@ -17,7 +17,7 @@ After compiled, you can add it in your `pom.xml` these lines:
 <dependency>
   <groupId>org.library</groupId>
   <artifactId>qubu</artifactId>
-  <version>0.1.0</version>
+  <version>0.2.0</version>
 </dependency>
 ```
 
@@ -31,4 +31,51 @@ String query = Query.from("test")
 That generates the following SQL:
 ```sql
 SELECT t1, t2 FROM test
+```
+### Filters
+All filters are implemented via `Criterion` class and applied via `Query.where` method:
+```java
+String query = Query.from("test")
+                .where(Criterion.eq("t1", "t2"))
+                .select("t1", "t2")
+                .getSql();
+```
+Generated SQL is:
+```sql
+SELECT t1, t2 FROM test WHERE t1 = t2
+```
+`Query.where` method can be repeated:
+```java
+String query = Query.from("test")
+                .where(Criterion.eq("t1", "t2"))
+                .where(Criterion.eq("t1", "?"))
+                .getSql();
+```
+```sql
+SELECT t1, t2 FROM test WHERE t1 = t2 AND t1 = ?
+```
+
+Criterion method can be `AND` or `OR`:
+```java
+String q = String query = Query.from("test")
+                .where(Criterion.eq("t1", "?"))
+                .where(Criterion.eq("t1", "?").method(Criterion.OR))
+                .select("t1", "t2")
+                .getSql();
+```
+```sql
+SELECT t1, t2 FROM test WHERE t1 = ? OR t1 = ?
+```
+
+Filters implemented are:
+
+#### Equality
+```java
+String query = Query.from("test")
+                .where(Criterion.eq("t1", "t2"))
+                .select("t1", "t2")
+                .getSql();
+```
+```sql
+SELECT t1, t2 FROM test WHERE t1 = t2
 ```
