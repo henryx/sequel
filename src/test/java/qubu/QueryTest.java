@@ -34,4 +34,15 @@ public class QueryTest {
 
         Assert.assertEquals(q, result);
     }
+
+    @Test
+    public void testEqualityFilter() {
+        String result = "SELECT t1, t2 FROM test WHERE t1 = 1";
+        String q = Query.from("test")
+                .select("t1", "t2")
+                .where()
+                .getSql();
+
+        Assert.assertEquals(q, result);
+    }
 }
