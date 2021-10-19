@@ -22,11 +22,17 @@ public class Query {
         query += String.join(", ", this.from);
 
         if (!this.criteria.isEmpty()) {
-            StringJoiner joiner = new StringJoiner(" ", " ", "").add("WHERE");
-            for (Criterion criterion : this.criteria) {
-                String sql = criterion.getSql();
-                joiner.add(sql);
-            }
+            StringJoiner joiner = new StringJoiner(" ");
+            this.criteria.forEach(criterion -> {
+                if (joiner.length() == 0) {
+                    joiner.add( " WHERE");
+                } else {
+                    joiner.add(criterion.getMethod());
+                }
+
+                joiner.add(criterion.getSql());
+
+            });
 
             query += joiner.toString();
         }
