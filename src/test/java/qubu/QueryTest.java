@@ -40,7 +40,7 @@ public class QueryTest {
         String result = "SELECT t1, t2 FROM test WHERE t1 = 1";
         String q = Query.from("test")
                 .select("t1", "t2")
-                .where()
+                .where(Criterion.eq("t1", "1"))
                 .getSql();
 
         Assert.assertEquals(q, result);
