@@ -4,10 +4,15 @@ package qubu;
  * Criterion class set criterion used for filtering data
  */
 public class Criterion {
+    public static final String AND = "AND";
+
     private final String criterion;
+    private String method;
 
     private Criterion(String criterion) {
         this.criterion = criterion;
+
+        this.method = Criterion.AND; // Default value
     }
 
     private static String build(String... pieces) {
@@ -24,6 +29,28 @@ public class Criterion {
     public static Criterion eq(String col1, String col2) {
         return new Criterion(build(col1, "=", col2));
     }
+
+    /**
+     * Sets the method that criterion need to be evaluated. Default method is in AND
+     *
+     * @param method define the method
+     * @return a builder instance of the class
+     */
+    public Criterion method(String method) {
+        this.method = method;
+
+        return this;
+    }
+
+    /**
+     * Returns the method used to evaluate the criterion
+     *
+     * @return Returns the method used to evaluate the criterion
+     */
+    public String getMethod() {
+        return method;
+    }
+
 
     /**
      * getSql returns generated criterion
