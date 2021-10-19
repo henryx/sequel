@@ -38,6 +38,15 @@ public class Query {
     }
 
     /**
+     * Where sets the query filters conditions
+     *
+     * @return a builder instance of the class
+     */
+    public Query where() {
+        return this;
+    }
+
+    /**
      * Select add columns in SELECT query
      *
      * @param columns Sets the columns used to select data
