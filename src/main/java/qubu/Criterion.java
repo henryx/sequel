@@ -5,6 +5,7 @@ package qubu;
  */
 public class Criterion {
     public static final String AND = "AND";
+    public static final String OR = "OR";
 
     private final String criterion;
     private String method;
