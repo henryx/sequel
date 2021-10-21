@@ -102,6 +102,18 @@ public class Criterion {
     }
 
     /**
+     * NOT IN filter
+     *
+     * @param col1   Column at left of the filter
+     * @param values Values used in the IN filter
+     * @return a builder instance of the class
+     */
+    public static Criterion nin(String col1, String... values) {
+        String val = Arrays.stream(values).collect(Collectors.joining(", ", "(", ")"));
+        return new Criterion(build(col1, "NOT IN", val));
+    }
+
+    /**
      * Sets the method that criterion need to be evaluated. Default method is in AND
      *
      * @param method define the method
