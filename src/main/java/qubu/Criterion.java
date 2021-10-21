@@ -32,6 +32,17 @@ public class Criterion {
     }
 
     /**
+     * Not equality filter
+     *
+     * @param col1 Column at left of the filter
+     * @param col2 Column at the right of the filter
+     * @return a builder instance of the class
+     */
+    public static Criterion neq(String col1, String col2) {
+        return new Criterion(build(col1, "!=", col2));
+    }
+
+    /**
      * Sets the method that criterion need to be evaluated. Default method is in AND
      *
      * @param method define the method
