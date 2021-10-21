@@ -71,6 +71,17 @@ public class QueryTest {
     }
 
     @Test
+    public void testGreatThan() {
+        String result = "SELECT t1, t2 FROM test WHERE t1 > t2";
+        String q = Query.from("test")
+                .where(Criterion.gt("t1", "t2"))
+                .select("t1", "t2")
+                .getSql();
+
+        Assert.assertEquals(q, result);
+    }
+
+    @Test
     public void testNotEquality() {
         String result = "SELECT t1, t2 FROM test WHERE t1 != t2";
         String q = Query.from("test")
