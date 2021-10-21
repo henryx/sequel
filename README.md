@@ -17,6 +17,7 @@ mvn clean install
 After compiled, you can add it in your `pom.xml` these lines:
 
 ```xml
+
 <dependency>
     <groupId>org.library</groupId>
     <artifactId>qubu</artifactId>
@@ -123,4 +124,109 @@ String query=Query.from("test")
 SELECT t1, t2
 FROM test
 WHERE t1 != t2
+```
+
+#### Greater than
+
+```java
+String query=Query.from("test")
+        .where(Criterion.gt("t1","t2"))
+        .select("t1","t2")
+        .getSql();
+```
+
+```sql
+SELECT t1, t2
+FROM test
+WHERE t1 > t2
+```
+
+#### Less than
+
+```java
+String query=Query.from("test")
+        .where(Criterion.lt("t1","t2"))
+        .select("t1","t2")
+        .getSql();
+```
+
+```sql
+SELECT t1, t2
+FROM test
+WHERE t1 < t2
+```
+
+#### Less or equal than
+
+```java
+String query=Query.from("test")
+        .where(Criterion.lte("t1","t2"))
+        .select("t1","t2")
+        .getSql();
+```
+
+```sql
+SELECT t1, t2
+FROM test
+WHERE t1 <= t2
+```
+
+#### Is null
+
+```java
+String query=Query.from("test")
+        .where(Criterion.isNull("t1"))
+        .select("t1","t2")
+        .getSql();
+```
+
+```sql
+SELECT t1, t2
+FROM test
+WHERE t1 IS NULL
+```
+
+#### Is not null
+
+```java
+String query=Query.from("test")
+        .where(Criterion.isNotNull("t1"))
+        .select("t1","t2")
+        .getSql();
+```
+
+```sql
+SELECT t1, t2
+FROM test
+WHERE t1 IS NOT NULL
+```
+
+#### In
+
+```java
+String query=Query.from("test")
+        .where(Criterion.in("t1","1","2","3"))
+        .select("t1","t2")
+        .getSql();
+```
+
+```sql
+SELECT t1, t2
+FROM test
+WHERE t1 IN (1, 2, 3)
+```
+
+#### Not in
+
+```java
+String query=Query.from("test")
+        .where(Criterion.nin("t1","1","2","3"))
+        .select("t1","t2")
+        .getSql();
+```
+
+```sql
+SELECT t1, t2
+FROM test
+WHERE t1 NOT IN (1, 2, 3)
 ```
