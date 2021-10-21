@@ -79,3 +79,14 @@ String query = Query.from("test")
 ```sql
 SELECT t1, t2 FROM test WHERE t1 = t2
 ```
+
+#### Not equality
+```java
+String query = Query.from("test")
+        .where(Criterion.neq("t1", "t2"))
+        .select("t1", "t2")
+        .getSql();
+```
+```sql
+SELECT t1, t2 FROM test WHERE t1 != t2
+```
