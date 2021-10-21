@@ -21,7 +21,7 @@ After compiled, you can add it in your `pom.xml` these lines:
 <dependency>
     <groupId>org.library</groupId>
     <artifactId>qubu</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
 </dependency>
 ```
 
