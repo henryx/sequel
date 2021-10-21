@@ -1,5 +1,8 @@
 package qubu;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 /**
  * Criterion class set criterion used for filtering data
  */
@@ -84,6 +87,18 @@ public class Criterion {
      */
     public static Criterion lte(String col1, String col2) {
         return new Criterion(build(col1, "<=", col2));
+    }
+
+    /**
+     * IN filter
+     *
+     * @param col1   Column at left of the filter
+     * @param values Values used in the IN filter
+     * @return a builder instance of the class
+     */
+    public static Criterion in(String col1, String... values) {
+        String val = Arrays.stream(values).collect(Collectors.joining(", ", "(", ")"));
+        return new Criterion(build(col1, "IN", val));
     }
 
     /**
