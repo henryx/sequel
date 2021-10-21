@@ -126,6 +126,16 @@ public class Criterion {
     }
 
     /**
+     * Is null filter
+     *
+     * @param col1 Column to be evaluated
+     * @return a builder instance of the class
+     */
+    public static Criterion isNull(String col1) {
+        return new Criterion(build(col1, "IS NULL"));
+    }
+
+    /**
      * Sets the method that criterion need to be evaluated. Default method is in AND
      *
      * @param method define the method
