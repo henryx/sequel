@@ -114,6 +114,18 @@ public class Criterion {
     }
 
     /**
+     * Between filter
+     *
+     * @param column Column to be evaluated
+     * @param start  Value used to start evaluation
+     * @param end    Value used to end evaluation
+     * @return a builder instance of the class
+     */
+    public static Criterion between(String column, String start, String end) {
+        return new Criterion(build(column, "BETWEEN", start, "AND", end));
+    }
+
+    /**
      * Sets the method that criterion need to be evaluated. Default method is in AND
      *
      * @param method define the method
