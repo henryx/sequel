@@ -1,11 +1,16 @@
 package qubu;
 
+import java.util.StringJoiner;
+
 /**
  * Functions class builds aggregate functions in standard SQL language
  */
 public class Functions {
 
-    private Functions() {
+    private final String function;
+
+    private Functions(String function) {
+        this.function = function;
     }
 
     /**
@@ -15,7 +20,10 @@ public class Functions {
      * @return a builder instance of the class
      */
     public static Functions sum(String column) {
-        return new Functions();
+        StringJoiner joiner = new StringJoiner("", "SUM(", ")");
+        joiner.add(column);
+
+        return new Functions(joiner.toString());
     }
 
     /**
@@ -24,7 +32,7 @@ public class Functions {
      * @return a String that represents the generated criterion
      */
     public String getSql() {
-        return "";
+        return this.function;
     }
 
     @Override
