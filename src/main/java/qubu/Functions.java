@@ -17,4 +17,18 @@ public class Functions {
     public static Functions sum(String column) {
         return new Functions();
     }
+
+    /**
+     * getSql returns generated criterion
+     *
+     * @return a String that represents the generated criterion
+     */
+    public String getSql() {
+        return "";
+    }
+
+    @Override
+    public String toString() {
+        return this.getSql();
+    }
 }
