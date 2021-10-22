@@ -197,8 +197,8 @@ public class QueryTest {
     public void testGroupBySum() {
         String result = "SELECT t1, SUM(t2) FROM test WHERE t1 != t2 GROUP BY t1";
         String q = Query.from("test")
-                .where(Criterion.eq("t1", "t2"))
-                .select("t1", "t2")
+                .where(Criterion.neq("t1", "t2"))
+                .select("t1", Functions.sum("t2").getSql())
                 .getSql();
 
         Assert.assertEquals(q, result);
