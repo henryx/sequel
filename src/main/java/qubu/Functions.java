@@ -67,6 +67,19 @@ public class Functions {
     }
 
     /**
+     * COUNT returns an SQL construct used to count all rows based from passed column in aggregate query
+     *
+     * @param column the column name
+     * @return a builder instance of the class
+     */
+    public static Functions count(String column) {
+        StringJoiner joiner = new StringJoiner("", "COUNT(", ")");
+        joiner.add(column);
+
+        return new Functions(joiner.toString());
+    }
+
+    /**
      * getSql returns generated criterion
      *
      * @return a String that represents the generated criterion
