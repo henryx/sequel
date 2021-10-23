@@ -50,31 +50,13 @@ SELECT t1, t2
 FROM test
 ```
 
-### Filters
-
-All filters are implemented via `Criterion` class and applied at `Query.where` method:
-
-```java
-String query=Query.from("test")
-        .where(Criterion.eq("t1","t2"))
-        .select("t1","t2")
-        .getSql();
-```
-
-Generated SQL is:
-
-```sql
-SELECT t1, t2
-FROM test
-WHERE t1 = t2
-```
-
 `Query.where` method can be repeated:
 
 ```java
 String query=Query.from("test")
         .where(Criterion.eq("t1","t2"))
         .where(Criterion.eq("t1","?"))
+        .select("t1","t2")
         .getSql();
 ```
 
@@ -100,6 +82,25 @@ SELECT t1, t2
 FROM test
 WHERE t1 = ?
    OR t1 = ?
+```
+
+### Filters
+
+All filters are implemented via `Criterion` class and applied at `Query.where` method:
+
+```java
+String query=Query.from("test")
+        .where(Criterion.eq("t1","t2"))
+        .select("t1","t2")
+        .getSql();
+```
+
+Generated SQL is:
+
+```sql
+SELECT t1, t2
+FROM test
+WHERE t1 = t2
 ```
 
 Filters implemented are:
