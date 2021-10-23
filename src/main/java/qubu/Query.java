@@ -62,17 +62,6 @@ public class Query {
     }
 
     /**
-     * Where sets the query filters conditions
-     *
-     * @return a builder instance of the class
-     */
-    public Query where(Criterion criterion) {
-        this.criteria.add(criterion);
-
-        return this;
-    }
-
-    /**
      * Select add columns in SELECT query
      *
      * @param columns Sets the columns used to select data
@@ -86,7 +75,18 @@ public class Query {
     }
 
     /**
-     * GroropBy sets columns used to aggregate data
+     * Where sets the query filters conditions
+     *
+     * @return a builder instance of the class
+     */
+    public Query where(Criterion criterion) {
+        this.criteria.add(criterion);
+
+        return this;
+    }
+
+    /**
+     * GroupBy sets columns used to aggregate data
      *
      * @param columns sets columns used to aggregate data
      * @return a builder instance of the class
