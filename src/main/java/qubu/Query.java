@@ -7,12 +7,15 @@ public class Query {
     private final List<String> from;
     private final List<Criterion> criteria;
     private final List<String> groupBy;
+    private final List<String> orderBy;
     private List<String> columns;
+
 
     private Query(List<String> tables) {
         this.from = tables;
         this.criteria = new ArrayList<>();
         this.groupBy = new ArrayList<>();
+        this.orderBy = new ArrayList<>();
     }
 
     private String build() {
@@ -96,6 +99,19 @@ public class Query {
 
         return this;
     }
+
+    /**
+     * OrderBy sets columns used to order result data
+     *
+     * @param columns sets columns used to aggregate data
+     * @return a builder instance of the class
+     */
+    public Query orderBy(String... columns) {
+        Collections.addAll(this.orderBy, columns);
+
+        return this;
+    }
+
 
     /**
      * getSql returns generated criterion
