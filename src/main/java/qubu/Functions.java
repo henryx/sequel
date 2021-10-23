@@ -27,6 +27,19 @@ public class Functions {
     }
 
     /**
+     * AVG returns an SQL construct used to return to calculate the average in the column in aggregate query
+     *
+     * @param column the column name
+     * @return a builder instance of the class
+     */
+    public static Functions avg(String column) {
+        StringJoiner joiner = new StringJoiner("", "AVG(", ")");
+        joiner.add(column);
+
+        return new Functions(joiner.toString());
+    }
+
+    /**
      * getSql returns generated criterion
      *
      * @return a String that represents the generated criterion
