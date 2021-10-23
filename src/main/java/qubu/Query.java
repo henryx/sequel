@@ -6,11 +6,13 @@ import java.util.stream.Collectors;
 public class Query {
     private final List<String> from;
     private final List<Criterion> criteria;
+    private final List<String> groupBy;
     private List<String> columns;
 
     private Query(List<String> tables) {
         this.from = tables;
         this.criteria = new ArrayList<>();
+        this.groupBy = new ArrayList<>();
     }
 
     private String build() {
@@ -25,17 +27,23 @@ public class Query {
             StringJoiner joiner = new StringJoiner(" ");
             this.criteria.forEach(criterion -> {
                 if (joiner.length() == 0) {
-                    joiner.add( " WHERE");
+                    joiner.add(" WHERE");
                 } else {
                     joiner.add(criterion.getMethod());
                 }
 
                 joiner.add(criterion.getSql());
-
             });
 
             query += joiner.toString();
         }
+
+        if (!this.groupBy.isEmpty()) {
+            StringJoiner joiner = new StringJoiner(", ", " GROUP BY ", "");
+            this.groupBy.forEach(joiner::add);
+            query += joiner.toString();
+        }
+
 
         return query;
     }
@@ -73,6 +81,18 @@ public class Query {
     public Query select(String... columns) {
         this.columns = Arrays.stream(columns).filter(e -> !Objects.equals(e, ""))
                 .collect(Collectors.toList());
+
+        return this;
+    }
+
+    /**
+     * GroropBy sets columns used to aggregate data
+     *
+     * @param columns sets columns used to aggregate data
+     * @return a builder instance of the class
+     */
+    public Query groupBy(String... columns) {
+        Collections.addAll(this.groupBy, columns);
 
         return this;
     }
