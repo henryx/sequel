@@ -195,10 +195,11 @@ public class QueryTest {
 
     @Test
     public void testGroupBySum() {
-        String result = "SELECT t1, SUM(t2) FROM test WHERE t1 != t2 GROUP BY t1";
+        String result = "SELECT t1, t2, SUM(t3) FROM test WHERE t1 != t2 GROUP BY t1, t2";
         String q = Query.from("test")
                 .where(Criterion.neq("t1", "t2"))
-                .select("t1", Functions.sum("t2").getSql())
+                .select("t1", "t2", Functions.sum("t3").getSql())
+                .groupBy("t1", "t2")
                 .getSql();
 
         Assert.assertEquals(q, result);
