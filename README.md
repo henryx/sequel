@@ -44,7 +44,7 @@ FROM test
 
 ### Filters
 
-All filters are implemented via `Criterion` class and applied via `Query.where` method:
+All filters are implemented via `Criterion` class and applied at `Query.where` method:
 
 ```java
 String query=Query.from("test")
@@ -229,4 +229,93 @@ String query=Query.from("test")
 SELECT t1, t2
 FROM test
 WHERE t1 NOT IN (1, 2, 3)
+```
+
+### Aggregations
+
+`Query.groupBy` mehtod implements aggregation methods described in `Functions` class:
+
+#### Count
+
+```java
+String query=Query.from("test")
+        .where(Criterion.neq("t1","t2"))
+        .select("t1","t2",Functions.count("t3").getSql())
+        .groupBy("t1","t2")
+        .getSql();
+```
+
+```sql
+SELECT t1, t2, COUNT(t3)
+FROM test
+WHERE t1 != t2
+GROUP BY t1, t2
+```
+
+#### Sum
+
+```java
+String query=Query.from("test")
+        .where(Criterion.neq("t1","t2"))
+        .select("t1","t2",Functions.sum("t3").getSql())
+        .groupBy("t1","t2")
+        .getSql();
+```
+
+```sql
+SELECT t1, t2, SUM(t3)
+FROM test
+WHERE t1 != t2
+GROUP BY t1, t2
+```
+
+#### Average
+
+```java
+String query=Query.from("test")
+        .where(Criterion.neq("t1","t2"))
+        .select("t1","t2",Functions.avg("t3").getSql())
+        .groupBy("t1","t2")
+        .getSql();
+```
+
+```sql
+SELECT t1, t2, AVG(t3)
+FROM test
+WHERE t1 != t2
+GROUP BY t1, t2
+```
+
+#### Minimum
+
+```java
+String query=Query.from("test")
+        .where(Criterion.neq("t1","t2"))
+        .select("t1","t2",Functions.min("t3").getSql())
+        .groupBy("t1","t2")
+        .getSql();
+```
+
+```sql
+SELECT t1, t2, MIN(t3)
+FROM test
+WHERE t1 != t2
+GROUP BY t1, t2
+```
+
+#### Maximum
+
+```java
+String query=Query.from("test")
+        .where(Criterion.neq("t1","t2"))
+        .select("t1","t2",Functions.max("t3").getSql())
+        .groupBy("t1","t2")
+        .getSql();
+```
+
+```sql
+SELECT t1, t2, MAX(t3)
+FROM test
+WHERE t1 != t2
+GROUP BY t1, t2
 ```
