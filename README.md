@@ -84,6 +84,25 @@ WHERE t1 = ?
    OR t1 = ?
 ```
 
+Query can be ordered using `Query.orderBy` method:
+
+```java
+String q=String query=Query.from("test")
+        .where(Criterion.eq("t1","?"))
+        .where(Criterion.eq("t1","?").method(Criterion.OR))
+        .select("t1","t2")
+        .orderBy("t1")
+        .getSql();
+```
+
+```sql
+SELECT t1, t2
+FROM test
+WHERE t1 = ?
+   OR t1 = ?
+ORDER BY t1
+```
+
 ### Filters
 
 All filters are implemented via `Criterion` class and applied at `Query.where` method:
