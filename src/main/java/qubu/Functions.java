@@ -27,13 +27,26 @@ public class Functions {
     }
 
     /**
-     * AVG returns an SQL construct used to return to calculate the average in the column in aggregate query
+     * AVG returns an SQL construct used to calculate the average in the column in aggregate query
      *
      * @param column the column name
      * @return a builder instance of the class
      */
     public static Functions avg(String column) {
         StringJoiner joiner = new StringJoiner("", "AVG(", ")");
+        joiner.add(column);
+
+        return new Functions(joiner.toString());
+    }
+
+    /**
+     * MIN returns an SQL construct used to calculate the minimum value in the column in aggregate query
+     *
+     * @param column the column name
+     * @return a builder instance of the class
+     */
+    public static Functions min(String column) {
+        StringJoiner joiner = new StringJoiner("", "MIN(", ")");
         joiner.add(column);
 
         return new Functions(joiner.toString());
