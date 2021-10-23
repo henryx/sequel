@@ -1,6 +1,14 @@
 # QuBu
 
-QUery BUilder is a Java query builder inspired from [PyPika](https://github.com/kayak/pypika)
+QUery BUilder is a Java query builder inspired from [PyPika](https://github.com/kayak/pypika). It supports:
+
+- Simple query filters like equal, not equal
+- Range filters like BETWEEN, IN, NOT IN
+- Criteria filter's method like AND, OR
+- GROUP BY using standard functions for aggregation like COUNT(), SUM() and so on
+
+Intention of the library is to generate a valid SQL query. Is not an ORM and is not intended to use it for validating
+query input
 
 ## Compatibility
 
