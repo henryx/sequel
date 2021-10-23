@@ -14,7 +14,7 @@ public class Functions {
     }
 
     /**
-     * Sum returns a sum of all values in column
+     * SUM returns an SQL construct used to sum the column in aggregate query
      *
      * @param column the column name
      * @return a builder instance of the class
