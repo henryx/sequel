@@ -52,6 +52,20 @@ public class Functions {
         return new Functions(joiner.toString());
     }
 
+
+    /**
+     * MAX returns an SQL construct used to calculate the maximum value in the column in aggregate query
+     *
+     * @param column the column name
+     * @return a builder instance of the class
+     */
+    public static Functions max(String column) {
+        StringJoiner joiner = new StringJoiner("", "MAX(", ")");
+        joiner.add(column);
+
+        return new Functions(joiner.toString());
+    }
+
     /**
      * getSql returns generated criterion
      *
