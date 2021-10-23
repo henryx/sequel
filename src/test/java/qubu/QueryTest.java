@@ -204,4 +204,52 @@ public class QueryTest {
 
         Assert.assertEquals(q, result);
     }
+
+    @Test
+    public void testGroupByAvg() {
+        String result = "SELECT t1, t2, AVG(t3) FROM test WHERE t1 != t2 GROUP BY t1, t2";
+        String q = Query.from("test")
+                .where(Criterion.neq("t1", "t2"))
+                .select("t1", "t2", Functions.avg("t3").getSql())
+                .groupBy("t1", "t2")
+                .getSql();
+
+        Assert.assertEquals(q, result);
+    }
+
+    @Test
+    public void testGroupByMin() {
+        String result = "SELECT t1, t2, MIN(t3) FROM test WHERE t1 != t2 GROUP BY t1, t2";
+        String q = Query.from("test")
+                .where(Criterion.neq("t1", "t2"))
+                .select("t1", "t2", Functions.min("t3").getSql())
+                .groupBy("t1", "t2")
+                .getSql();
+
+        Assert.assertEquals(q, result);
+    }
+
+    @Test
+    public void testGroupByMax() {
+        String result = "SELECT t1, t2, MAX(t3) FROM test WHERE t1 != t2 GROUP BY t1, t2";
+        String q = Query.from("test")
+                .where(Criterion.neq("t1", "t2"))
+                .select("t1", "t2", Functions.max("t3").getSql())
+                .groupBy("t1", "t2")
+                .getSql();
+
+        Assert.assertEquals(q, result);
+    }
+
+    @Test
+    public void testGroupByCount() {
+        String result = "SELECT t1, t2, COUNT(t3) FROM test WHERE t1 != t2 GROUP BY t1, t2";
+        String q = Query.from("test")
+                .where(Criterion.neq("t1", "t2"))
+                .select("t1", "t2", Functions.count("t3").getSql())
+                .groupBy("t1", "t2")
+                .getSql();
+
+        Assert.assertEquals(q, result);
+    }
 }
