@@ -252,4 +252,15 @@ public class QueryTest {
 
         Assert.assertEquals(q, result);
     }
+
+    @Test
+    public void testOrderBy() {
+        String result = "SELECT t1, t2 FROM test ORDER BY t1";
+        String q = Query.from("test")
+                .select("t1", "t2")
+                .orderBy("t1")
+                .getSql();
+
+        Assert.assertEquals(q, result);
+    }
 }
