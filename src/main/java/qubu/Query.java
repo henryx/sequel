@@ -47,6 +47,12 @@ public class Query {
             query += joiner.toString();
         }
 
+        if (!this.orderBy.isEmpty()) {
+            StringJoiner joiner = new StringJoiner(", ", " ORDER BY ", "");
+            this.orderBy.forEach(joiner::add);
+            query += joiner.toString();
+        }
+
 
         return query;
     }
