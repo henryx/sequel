@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 public class Query {
     private final List<String> from;
     private final List<Criterion> whereCriteria;
+    private final List<Criterion> havingCriteria;
     private final List<String> groupBy;
     private final List<String> orderBy;
     private List<String> columns;
@@ -14,6 +15,7 @@ public class Query {
     private Query(List<String> tables) {
         this.from = tables;
         this.whereCriteria = new ArrayList<>();
+        this.havingCriteria = new ArrayList<>();
         this.groupBy = new ArrayList<>();
         this.orderBy = new ArrayList<>();
     }
@@ -113,7 +115,8 @@ public class Query {
      * @return a builder instance of the class
      */
     public Query having(Criterion criterion) {
-        // TODO: implement HAVING
+        this.havingCriteria.add(criterion);
+
         return this;
     }
 
