@@ -276,4 +276,18 @@ public class QueryTest {
 
         Assert.assertEquals(q, result);
     }
+
+    @Test
+    public void testGroupByHavingMultiple() {
+        String result = "SELECT t1, t2, COUNT(t3) FROM test WHERE t1 != t2 GROUP BY t1, t2 HAVING COUNT(t3) >= 1000 AND COUNT(t1) < 10";
+        String q = Query.from("test")
+                .where(Criterion.neq("t1", "t2"))
+                .select("t1", "t2", Functions.count("t3").getSql())
+                .groupBy("t1", "t2")
+                .having(Criterion.gte(Functions.count("t3").getSql(), "1000"))
+                .having(Criterion.lt(Functions.count("t1").getSql(), "10").method(Criterion.AND))
+                .getSql();
+
+        Assert.assertEquals(q, result);
+    }
 }
