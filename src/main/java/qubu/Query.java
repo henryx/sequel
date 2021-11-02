@@ -107,6 +107,17 @@ public class Query {
     }
 
     /**
+     * Having sets criteria for HAVING clause
+     *
+     * @param criterion sets a criverion used in HAVING clause
+     * @return a builder instance of the class
+     */
+    public Query having(Criterion criterion) {
+        // TODO: implement HAVING
+        return this;
+    }
+
+    /**
      * OrderBy sets columns used to order result data
      *
      * @param columns sets columns used to aggregate data
@@ -117,7 +128,6 @@ public class Query {
 
         return this;
     }
-
 
     /**
      * getSql returns generated criterion
