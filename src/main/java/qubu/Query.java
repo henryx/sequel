@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class Query {
     private final List<String> from;
-    private final List<Criterion> criteria;
+    private final List<Criterion> whereCriteria;
     private final List<String> groupBy;
     private final List<String> orderBy;
     private List<String> columns;
@@ -13,7 +13,7 @@ public class Query {
 
     private Query(List<String> tables) {
         this.from = tables;
-        this.criteria = new ArrayList<>();
+        this.whereCriteria = new ArrayList<>();
         this.groupBy = new ArrayList<>();
         this.orderBy = new ArrayList<>();
     }
@@ -26,9 +26,9 @@ public class Query {
         String query = this.columns.stream().collect(Collectors.joining(", ", "SELECT ", " FROM "));
         query += String.join(", ", this.from);
 
-        if (!this.criteria.isEmpty()) {
+        if (!this.whereCriteria.isEmpty()) {
             StringJoiner joiner = new StringJoiner(" ");
-            this.criteria.forEach(criterion -> {
+            this.whereCriteria.forEach(criterion -> {
                 if (joiner.length() == 0) {
                     joiner.add(" WHERE");
                 } else {
@@ -89,7 +89,7 @@ public class Query {
      * @return a builder instance of the class
      */
     public Query where(Criterion criterion) {
-        this.criteria.add(criterion);
+        this.whereCriteria.add(criterion);
 
         return this;
     }
