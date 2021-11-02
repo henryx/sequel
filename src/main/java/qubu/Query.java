@@ -49,6 +49,20 @@ public class Query {
             query += joiner.toString();
         }
 
+        if (!this.havingCriteria.isEmpty()) {
+            StringJoiner joiner = new StringJoiner(" ");
+            this.havingCriteria.forEach(criterion -> {
+                if (joiner.length() == 0) {
+                    joiner.add(" HAVING");
+                } else {
+                    joiner.add(criterion.getMethod());
+                }
+                joiner.add(criterion.getSql());
+            });
+
+            query += joiner.toString();
+        }
+
         if (!this.orderBy.isEmpty()) {
             StringJoiner joiner = new StringJoiner(", ", " ORDER BY ", "");
             this.orderBy.forEach(joiner::add);
