@@ -29,7 +29,7 @@ After compiled, you can add it in your `pom.xml` these lines:
 <dependency>
     <groupId>org.library</groupId>
     <artifactId>qubu</artifactId>
-    <version>0.5.0</version>
+    <version>0.6.0</version>
 </dependency>
 ```
 
