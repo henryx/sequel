@@ -57,6 +57,17 @@ public class QueryTest {
     }
 
     @Test
+    public void testEqualityFilterSubQuery() {
+        String result = "SELECT t1, t2 FROM test WHERE t1 = (SELECT a2 FROM test WHERE a1 != 3)";
+        String q = Query.from("test")
+                .select("t1", "t2")
+                .where(Criterion.eq("t1", Query.from("test").select("a2").where(Criterion.neq("a1", "3"))))
+                .getSql();
+
+        Assert.assertEquals(q, result);
+    }
+
+    @Test
     public void testMultipleEqualityFilter() {
         String result = "SELECT t1, t2 FROM test WHERE t1 = 1 AND t2 = 2";
         String q = Query.from("test")
@@ -92,6 +103,17 @@ public class QueryTest {
     }
 
     @Test
+    public void testGreatThanSubQuery() {
+        String result = "SELECT t1, t2 FROM test WHERE t1 > (SELECT a2 FROM test WHERE a1 != 3)";
+        String q = Query.from("test")
+                .select("t1", "t2")
+                .where(Criterion.gt("t1", Query.from("test").select("a2").where(Criterion.neq("a1", "3"))))
+                .getSql();
+
+        Assert.assertEquals(q, result);
+    }
+
+    @Test
     public void testGreatEqualThan() {
         String result = "SELECT t1, t2 FROM test WHERE t1 >= t2";
         String q = Query.from("test")
@@ -103,11 +125,33 @@ public class QueryTest {
     }
 
     @Test
+    public void testGreatEqualThanSubQuery() {
+        String expected = "SELECT t1, t2 FROM test WHERE t1 >= (SELECT a2 FROM test WHERE a1 != 3)";
+        String q = Query.from("test")
+                .select("t1", "t2")
+                .where(Criterion.gte("t1", Query.from("test").select("a2").where(Criterion.neq("a1", "3"))))
+                .getSql();
+
+        Assert.assertEquals(expected, q);
+    }
+
+    @Test
     public void testLessThan() {
         String result = "SELECT t1, t2 FROM test WHERE t1 < t2";
         String q = Query.from("test")
                 .where(Criterion.lt("t1", "t2"))
                 .select("t1", "t2")
+                .getSql();
+
+        Assert.assertEquals(q, result);
+    }
+
+    @Test
+    public void testLessThanSubQuery() {
+        String result = "SELECT t1, t2 FROM test WHERE t1 < (SELECT a2 FROM test WHERE a1 != 3)";
+        String q = Query.from("test")
+                .select("t1", "t2")
+                .where(Criterion.lt("t1", Query.from("test").select("a2").where(Criterion.neq("a1", "3"))))
                 .getSql();
 
         Assert.assertEquals(q, result);
@@ -125,6 +169,17 @@ public class QueryTest {
     }
 
     @Test
+    public void testLessEqualThanSubQuery() {
+        String result = "SELECT t1, t2 FROM test WHERE t1 <= (SELECT a2 FROM test WHERE a1 != 3)";
+        String q = Query.from("test")
+                .select("t1", "t2")
+                .where(Criterion.lte("t1", Query.from("test").select("a2").where(Criterion.neq("a1", "3"))))
+                .getSql();
+
+        Assert.assertEquals(q, result);
+    }
+
+    @Test
     public void testIn() {
         String result = "SELECT t1, t2 FROM test WHERE t1 IN (1, 2, 3)";
         String q = Query.from("test")
@@ -136,10 +191,32 @@ public class QueryTest {
     }
 
     @Test
+    public void testInSubQuery() {
+        String result = "SELECT t1, t2 FROM test WHERE t1 IN (SELECT a2 FROM test WHERE a1 != 3)";
+        String q = Query.from("test")
+                .where(Criterion.in("t1", Query.from("test").select("a2").where(Criterion.neq("a1", "3"))))
+                .select("t1", "t2")
+                .getSql();
+
+        Assert.assertEquals(q, result);
+    }
+
+    @Test
     public void testNotIn() {
         String result = "SELECT t1, t2 FROM test WHERE t1 NOT IN ('a', 'b', 'c')";
         String q = Query.from("test")
                 .where(Criterion.nin("t1", "'a'", "'b'", "'c'"))
+                .select("t1", "t2")
+                .getSql();
+
+        Assert.assertEquals(q, result);
+    }
+
+    @Test
+    public void testNotInSubQuery() {
+        String result = "SELECT t1, t2 FROM test WHERE t1 NOT IN (SELECT a2 FROM test WHERE a1 != 3)";
+        String q = Query.from("test")
+                .where(Criterion.nin("t1", Query.from("test").select("a2").where(Criterion.neq("a1", "3"))))
                 .select("t1", "t2")
                 .getSql();
 
@@ -184,6 +261,17 @@ public class QueryTest {
         String result = "SELECT t1, t2 FROM test WHERE t1 != t2";
         String q = Query.from("test")
                 .where(Criterion.neq("t1", "t2"))
+                .select("t1", "t2")
+                .getSql();
+
+        Assert.assertEquals(q, result);
+    }
+
+    @Test
+    public void testNotEqualitySubQuery() {
+        String result = "SELECT t1, t2 FROM test WHERE t1 != (SELECT a2 FROM test WHERE a1 != 3)";
+        String q = Query.from("test")
+                .where(Criterion.neq("t1", Query.from("test").select("a2").where(Criterion.neq("a1", "3"))))
                 .select("t1", "t2")
                 .getSql();
 
