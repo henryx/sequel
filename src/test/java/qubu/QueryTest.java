@@ -36,6 +36,16 @@ public class QueryTest {
     }
 
     @Test
+    public void testMultipleTables() {
+        String result = "SELECT a.t1, b.t2 FROM test1 a, test2 b";
+        String q = Query.from("test1 a", "test2 b")
+                .select("a.t1", "b.t2")
+                .getSql();
+
+        Assert.assertEquals(q, result);
+    }
+
+    @Test
     public void testEqualityFilter() {
         String result = "SELECT t1, t2 FROM test WHERE t1 = 1";
         String q = Query.from("test")
