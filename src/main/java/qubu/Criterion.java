@@ -1,6 +1,7 @@
 package qubu;
 
 import java.util.Arrays;
+import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 /**
@@ -35,6 +36,20 @@ public class Criterion {
     }
 
     /**
+     * Equality filter
+     *
+     * @param col1     Column at left of the filter
+     * @param subquery Query object used as subquery filter
+     * @return a builder instance of the class
+     */
+    public static Criterion eq(String col1, Query subquery) {
+        StringJoiner val = new StringJoiner("", "(", ")");
+        val.add(subquery.getSql());
+
+        return new Criterion(build(col1, "=", val.toString()));
+    }
+
+    /**
      * Not equality filter
      *
      * @param col1 Column at left of the filter
@@ -43,6 +58,20 @@ public class Criterion {
      */
     public static Criterion neq(String col1, String col2) {
         return new Criterion(build(col1, "!=", col2));
+    }
+
+    /**
+     * Not equality filter
+     *
+     * @param col1     Column at left of the filter
+     * @param subquery Query object used as subquery filter
+     * @return a builder instance of the class
+     */
+    public static Criterion neq(String col1, Query subquery) {
+        StringJoiner val = new StringJoiner("", "(", ")");
+        val.add(subquery.getSql());
+
+        return new Criterion(build(col1, "!=", val.toString()));
     }
 
     /**
@@ -57,6 +86,19 @@ public class Criterion {
     }
 
     /**
+     * Greater than filter
+     *
+     * @param col1     Column at left of the filter
+     * @param subquery Query object used as subquery filter
+     * @return a builder instance of the class
+     */
+    public static Criterion gt(String col1, Query subquery) {
+        StringJoiner val = new StringJoiner("", "(", ")");
+        val.add(subquery.getSql());
+        return new Criterion(build(col1, ">", val.toString()));
+    }
+
+    /**
      * Greater or equal than filter
      *
      * @param col1 Column at left of the filter
@@ -65,6 +107,19 @@ public class Criterion {
      */
     public static Criterion gte(String col1, String col2) {
         return new Criterion(build(col1, ">=", col2));
+    }
+
+    /**
+     * Greater or equal than filter
+     *
+     * @param col1     Column at left of the filter
+     * @param subquery Query object used as subquery filter
+     * @return a builder instance of the class
+     */
+    public static Criterion gte(String col1, Query subquery) {
+        StringJoiner val = new StringJoiner("", "(", ")");
+        val.add(subquery.getSql());
+        return new Criterion(build(col1, ">=", val.toString()));
     }
 
     /**
@@ -79,6 +134,19 @@ public class Criterion {
     }
 
     /**
+     * Less than filter
+     *
+     * @param col1     Column at left of the filter
+     * @param subquery Query object used as subquery filter
+     * @return a builder instance of the class
+     */
+    public static Criterion lt(String col1, Query subquery) {
+        StringJoiner val = new StringJoiner("", "(", ")");
+        val.add(subquery.getSql());
+        return new Criterion(build(col1, "<", val.toString()));
+    }
+
+    /**
      * Less or equal than filter
      *
      * @param col1 Column at left of the filter
@@ -87,6 +155,19 @@ public class Criterion {
      */
     public static Criterion lte(String col1, String col2) {
         return new Criterion(build(col1, "<=", col2));
+    }
+
+    /**
+     * Less or equal than filter
+     *
+     * @param col1     Column at left of the filter
+     * @param subquery Query object used as subquery filter
+     * @return a builder instance of the class
+     */
+    public static Criterion lte(String col1, Query subquery) {
+        StringJoiner val = new StringJoiner("", "(", ")");
+        val.add(subquery.getSql());
+        return new Criterion(build(col1, "<=", val.toString()));
     }
 
     /**
@@ -102,6 +183,19 @@ public class Criterion {
     }
 
     /**
+     * IN filter
+     *
+     * @param col1     Column at left of the filter
+     * @param subquery Query object used as subquery filter
+     * @return a builder instance of the class
+     */
+    public static Criterion in(String col1, Query subquery) {
+        StringJoiner val = new StringJoiner("", "(", ")");
+        val.add(subquery.getSql());
+        return new Criterion(build(col1, "IN", val.toString()));
+    }
+
+    /**
      * NOT IN filter
      *
      * @param col1   Column at left of the filter
@@ -111,6 +205,19 @@ public class Criterion {
     public static Criterion nin(String col1, String... values) {
         String val = Arrays.stream(values).collect(Collectors.joining(", ", "(", ")"));
         return new Criterion(build(col1, "NOT IN", val));
+    }
+
+    /**
+     * NOT IN filter
+     *
+     * @param col1     Column at left of the filter
+     * @param subquery Query object used as subquery filter
+     * @return a builder instance of the class
+     */
+    public static Criterion nin(String col1, Query subquery) {
+        StringJoiner val = new StringJoiner("", "(", ")");
+        val.add(subquery.getSql());
+        return new Criterion(build(col1, "NOT IN", val.toString()));
     }
 
     /**
