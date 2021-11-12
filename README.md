@@ -276,6 +276,23 @@ FROM test
 WHERE t1 NOT IN (1, 2, 3)
 ```
 
+#### Subqueries
+
+Is it possible to define a subquery as filter in all criteria methods:
+
+```java
+String query=Query.from("test")
+        .select("t1","t2")
+        .where(Criterion.gte("t1",Query.from("test").select("a2").where(Criterion.neq("a1","3"))))
+        .getSql();
+```
+
+```sql
+SELECT t1, t2
+FROM test
+WHERE t1 >= (SELECT a2 FROM test WHERE a1 != 3)
+```
+
 ### Aggregations
 
 `Query.groupBy` mehtod implements aggregation methods described in `Functions` class:
