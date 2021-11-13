@@ -1,4 +1,4 @@
-package qubu;
+package com.github.henryx.qubu;
 
 import org.junit.Assert;
 import org.junit.Test;

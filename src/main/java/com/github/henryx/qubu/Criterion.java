@@ -1,4 +1,4 @@
-package qubu;
+package com.github.henryx.qubu;
 
 import java.util.Arrays;
 import java.util.StringJoiner;
