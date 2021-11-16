@@ -71,6 +71,12 @@ public class Query {
             query += joiner.toString();
         }
 
+        if (Objects.nonNull(this.offset) && this.offset > 0) {
+            StringJoiner joiner = new StringJoiner("", " OFFSET ", " ROWS");
+            joiner.add(this.offset.toString());
+            query += joiner.toString();
+        }
+
         if (Objects.nonNull(this.limit) && this.limit > 0) {
             StringJoiner joiner = new StringJoiner("", " FETCH FIRST ", " ROWS ONLY");
             joiner.add(this.limit.toString());
