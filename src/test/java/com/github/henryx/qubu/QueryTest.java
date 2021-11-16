@@ -16,6 +16,17 @@ public class QueryTest {
     }
 
     @Test
+    public void testFromLimit() {
+        String expected = "SELECT t1, t2 FROM test FETCH FIRST 10 ROWS ONLY";
+        String q = Query.from("test")
+                .select("t1", "t2")
+                .limit(10)
+                .getSql();
+
+        Assert.assertEquals(expected, q);
+    }
+
+    @Test
     public void testEmptyFrom() {
         String expected = "";
         String q = Query.from("")
