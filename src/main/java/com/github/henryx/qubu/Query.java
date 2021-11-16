@@ -11,6 +11,7 @@ public class Query {
     private final List<String> orderBy;
     private List<String> columns;
     private Integer limit;
+    private Integer offset;
 
 
     private Query(List<String> tables) {
@@ -163,6 +164,18 @@ public class Query {
      */
     public Query limit(Integer rows) {
         this.limit = rows;
+
+        return this;
+    }
+
+    /**
+     * Offset sets the start how result data are fetched
+     *
+     * @param rows sets the number of the rows to be fetched
+     * @return a builder instance of the class
+     */
+    public Query offset(Integer rows) {
+        this.offset = rows;
 
         return this;
     }
