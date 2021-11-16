@@ -32,6 +32,7 @@ public class QueryTest {
         String q = Query.from("test")
                 .select("t1", "t2")
                 .limit(10)
+                .offset(3)
                 .getSql();
 
         Assert.assertEquals(expected, q);
