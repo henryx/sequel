@@ -38,11 +38,11 @@ It is possible to add the library as dependency bay adding this in your `pom.xml
 </repositories>
 
 <dependencies>
-    <dependency>
-        <groupId>com.github.henryx</groupId>
-        <artifactId>qubu</artifactId>
-        <version>0.6.0</version>
-    </dependency>
+<dependency>
+    <groupId>com.github.henryx</groupId>
+    <artifactId>qubu</artifactId>
+    <version>0.6.0</version>
+</dependency>
 </dependencies>
 ```
 
@@ -408,10 +408,31 @@ String query=Query.from("test")
         .getSql();
 ```
 
-[intellij]: @formatter:off
 ```sql
-SELECT t1, t2, COUNT(t3) FROM test WHERE t1 != t2 GROUP BY t1, t2 HAVING COUNT(t3) >= 1000 AND COUNT(t1) < 10
+SELECT t1, t2, COUNT(t3)
+FROM test
+WHERE t1 != t2
+GROUP BY t1, t2
+HAVING COUNT (t3) >= 1000 AND COUNT (t1) < 10
 ```
-[intellij]: @formatter:on
 
 As viewed in [WHERE](#filters) clause, `Query.having` can be repeated multiple times using `Criterion` class logic
+
+### Limit and offset
+
+`Query` support pagination with `limit()` and `offset()` methods:
+
+```java
+String query=Query.from("test")
+        .select("t1","t2")
+        .limit(10)
+        .offset(3)
+        .getSql();
+```
+
+Generated query performs the SQL:2008 standard:
+
+```sql
+SELECT t1, t2
+FROM test OFFSET 3 ROWS FETCH FIRST 10 ROWS ONLY;
+```
