@@ -10,6 +10,7 @@ public class Query {
     private final List<String> groupBy;
     private final List<String> orderBy;
     private List<String> columns;
+    private Integer limit;
 
 
     private Query(List<String> tables) {
@@ -142,6 +143,21 @@ public class Query {
      */
     public Query orderBy(String... columns) {
         Collections.addAll(this.orderBy, columns);
+
+        return this;
+    }
+
+    /**
+     * Limit fetch n rows from the result data.
+     * According to {@code SQL:2008}, clause of limit is:
+     * <p>
+     * {@code FETCH FIRST { row_count } ROWS ONLY}
+     *
+     * @param rows sets the number of the rows to be fetched
+     * @return a builder instance of the class
+     */
+    public Query limit(Integer rows) {
+        this.limit = rows;
 
         return this;
     }
