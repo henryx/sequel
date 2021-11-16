@@ -1,5 +1,7 @@
 # QuBu
 
+[![](https://jitpack.io/v/henryx/qubu.svg)](https://jitpack.io/#henryx/qubu)
+
 QUery BUilder is a Java query builder inspired from [PyPika](https://github.com/kayak/pypika). It supports:
 
 - Simple query filters like equal, not equal
@@ -14,7 +16,7 @@ query input
 
 This library is written for Java 8 or greater
 
-## Install
+## Compilation
 
 With maven, you should compile with:
 
@@ -22,15 +24,26 @@ With maven, you should compile with:
 mvn clean install
 ```
 
-After compiled, you can add it in your `pom.xml` these lines:
+## Add dependency
+
+It is possible to add the library as dependency bay adding this in your `pom.xml`:
 
 ```xml
 
-<dependency>
-    <groupId>org.library</groupId>
-    <artifactId>qubu</artifactId>
-    <version>0.6.0</version>
-</dependency>
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+
+<dependencies>
+    <dependency>
+        <groupId>com.github.henryx</groupId>
+        <artifactId>qubu</artifactId>
+        <version>0.6.0</version>
+    </dependency>
+</dependencies>
 ```
 
 ## Queries
