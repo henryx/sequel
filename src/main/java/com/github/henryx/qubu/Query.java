@@ -9,6 +9,7 @@ public class Query {
     private final List<Criterion> havingCriteria;
     private final List<String> groupBy;
     private final List<String> orderBy;
+    private final List<String> union;
     private List<String> columns;
     private Integer limit;
     private Integer offset;
@@ -20,6 +21,8 @@ public class Query {
         this.havingCriteria = new ArrayList<>();
         this.groupBy = new ArrayList<>();
         this.orderBy = new ArrayList<>();
+
+        this.union = new ArrayList<>();
     }
 
     private String build() {
