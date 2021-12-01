@@ -479,3 +479,47 @@ UNION ALL
 SELECT t3, t4
 FROM test2
 ```
+
+### INTERSECT
+
+`Query` support `INTERSECT` clause in queries using `intersect()` method:
+
+```java
+Query query1=Query.from("test1")
+        .select("t1","t2");
+
+Query query2=Query.from("test2")
+        .select("t3","t4");
+
+String query=query1.intersect(query2).getSql();
+```
+Generated query is:
+```sql
+SELECT t1, t2
+FROM test1
+INTERSECT
+SELECT t3, t4
+FROM test2
+```
+
+### EXCEPT
+
+`Query` support `EXCEPT` clause in queries using `except()` method:
+
+```java
+Query query1=Query.from("test1")
+        .select("t1","t2");
+
+Query query2=Query.from("test2")
+        .select("t3","t4");
+
+String query=query1.except(query2).getSql();
+```
+Generated query is:
+```sql
+SELECT t1, t2
+FROM test1
+EXCEPT
+SELECT t3, t4
+FROM test2
+```
