@@ -436,7 +436,7 @@ public class QueryTest {
     public void testIntersect() {
         String expected = "SELECT t1, t2 FROM test1 INTERSECT SELECT t3, t4 FROM test2";
         Query q2 = Query.from("test2").select("t3", "t4");
-        Query q1 = Query.from("test1").select("t1", "t2");
+        Query q1 = Query.from("test1").select("t1", "t2").intersect(q2);
 
         String q = q1.getSql();
         Assert.assertEquals(expected, q);
