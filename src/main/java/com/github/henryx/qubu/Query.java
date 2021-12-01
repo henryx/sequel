@@ -246,6 +246,18 @@ public class Query {
     }
 
     /**
+     * except permits to combine two or more queries using EXCEPT clause
+     *
+     * @param query a Query object that represents a query
+     * @return a builder instance of the class
+     */
+    public Query except(Query query) {
+        this.except.add(query.getSql());
+
+        return this;
+    }
+
+    /**
      * getSql returns generated criterion
      *
      * @return a String that represents the generated query
