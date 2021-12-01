@@ -436,3 +436,46 @@ Generated query performs the SQL:2008 standard:
 SELECT t1, t2
 FROM test OFFSET 3 ROWS FETCH FIRST 10 ROWS ONLY;
 ```
+
+## Sets
+
+### UNIONs
+
+`Query` support `UNION` clause in queries using `union()` method:
+
+```java
+Query query1=Query.from("test1")
+        .select("t1","t2");
+
+Query query2=Query.from("test2")
+        .select("t3","t4");
+
+String query=query1.union(query2).getSql();
+```
+Generated query is:
+```sql
+SELECT t1, t2
+FROM test1
+UNION
+SELECT t3, t4
+FROM test2
+```
+
+In the same way, support of `UNION ALL` is made by `unionAll()` method:
+```java
+Query query1=Query.from("test1")
+        .select("t1","t2");
+
+Query query2=Query.from("test2")
+        .select("t3","t4");
+
+String query=query1.unionAll(query2).getSql();
+```
+Generated query is:
+```sql
+SELECT t1, t2
+FROM test1
+UNION ALL
+SELECT t3, t4
+FROM test2
+```
