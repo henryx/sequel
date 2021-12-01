@@ -97,6 +97,12 @@ public class Query {
             query += joiner.toString();
         }
 
+        if (!this.intersect.isEmpty()) {
+            StringJoiner joiner = new StringJoiner(" ", " INTERSECT ", "");
+            this.intersect.forEach(joiner::add);
+            query += joiner.toString();
+        }
+
         return query;
     }
 
