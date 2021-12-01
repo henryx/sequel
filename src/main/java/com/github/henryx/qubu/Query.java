@@ -13,6 +13,7 @@ public class Query {
     private List<String> columns;
     private Integer limit;
     private Integer offset;
+    private Boolean unionAll;
 
 
     private Query(List<String> tables) {
@@ -23,6 +24,7 @@ public class Query {
         this.orderBy = new ArrayList<>();
 
         this.union = new ArrayList<>();
+        this.unionAll = Boolean.FALSE;
     }
 
     private String build() {
@@ -87,7 +89,8 @@ public class Query {
         }
 
         if (!this.union.isEmpty()) {
-            StringJoiner joiner = new StringJoiner(" ", " UNION ", "");
+            String prefix = this.unionAll ? " UNION ALL " : " UNION ";
+            StringJoiner joiner = new StringJoiner(" ", prefix, "");
             this.union.forEach(joiner::add);
             query += joiner.toString();
         }
@@ -203,6 +206,20 @@ public class Query {
      */
     public Query union(Query query) {
         this.union.add(query.getSql());
+
+        return this;
+    }
+
+    /**
+     * unionAll permits to combine two or more queries
+     *
+     * @param query a Query object that represents a query
+     * @return a builder instance of the class
+     */
+    public Query unionAll(Query query) {
+        this.union(query);
+        this.unionAll = Boolean.TRUE;
+
         return this;
     }
 
