@@ -201,7 +201,7 @@ public class Query {
     }
 
     /**
-     * Union permits to combine two or more queries
+     * union permits to combine two or more queries
      *
      * @param query a Query object that represents a query
      * @return a builder instance of the class
@@ -221,6 +221,18 @@ public class Query {
     public Query unionAll(Query query) {
         this.union(query);
         this.unionAll = Boolean.TRUE;
+
+        return this;
+    }
+
+    /**
+     * intersect permits intersection of two or more queries
+     *
+     * @param query a Query object that represents a query
+     * @return a builder instance of the class
+     */
+    public Query intersect(Query query) {
+        this.intersect.add(query.getSql());
 
         return this;
     }
