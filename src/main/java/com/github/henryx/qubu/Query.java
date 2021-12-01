@@ -190,6 +190,17 @@ public class Query {
     }
 
     /**
+     * Union permits to combine two or more queries
+     *
+     * @param query a Query object that represents a query
+     * @return a builder instance of the class
+     */
+    public Query union(Query query) {
+        this.union.add(query.getSql());
+        return this;
+    }
+
+    /**
      * getSql returns generated criterion
      *
      * @return a String that represents the generated query
