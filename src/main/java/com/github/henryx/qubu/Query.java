@@ -105,6 +105,12 @@ public class Query {
             query += joiner.toString();
         }
 
+        if (!this.except.isEmpty()) {
+            StringJoiner joiner = new StringJoiner(" ", " EXCEPT ", "");
+            this.except.forEach(joiner::add);
+            query += joiner.toString();
+        }
+
         return query;
     }
 
