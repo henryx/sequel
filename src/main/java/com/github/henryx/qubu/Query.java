@@ -86,6 +86,12 @@ public class Query {
             query += joiner.toString();
         }
 
+        if (!this.union.isEmpty()) {
+            StringJoiner joiner = new StringJoiner(" ", " UNION ", "");
+            this.union.forEach(joiner::add);
+            query += joiner.toString();
+        }
+
         return query;
     }
 
