@@ -11,6 +11,7 @@ public class Query {
     private final List<String> orderBy;
     private final List<String> union;
     private final List<String> intersect;
+    private final List<String> except;
     private List<String> columns;
     private Integer limit;
     private Integer offset;
@@ -26,6 +27,7 @@ public class Query {
 
         this.union = new ArrayList<>();
         this.intersect = new ArrayList<>();
+        this.except = new ArrayList<>();
         this.unionAll = Boolean.FALSE;
     }
 
