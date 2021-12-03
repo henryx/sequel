@@ -18,8 +18,8 @@ public class Query {
     private Boolean unionAll;
 
 
-    private Query(List<String> tables) {
-        this.from = tables;
+    private Query(String... tables) {
+        this.from = Arrays.asList(tables);
         this.whereCriteria = new ArrayList<>();
         this.havingCriteria = new ArrayList<>();
         this.groupBy = new ArrayList<>();
@@ -121,10 +121,22 @@ public class Query {
      * @return a builder instance of the class
      */
     public static Query from(String... tables) {
-        List<String> tableList = Arrays.stream(tables).filter(e -> !Objects.equals(e, ""))
-                .collect(Collectors.toList());
+        return new Query(Arrays.stream(tables).filter(e -> !Objects.equals(e, "")).toArray(String[]::new));
+    }
 
-        return new Query(tableList);
+    /**
+     * Sets the subquery used to select data. This is the entry point
+     *
+     * @param subquery Sets the subquery
+     * @param alias Sets the subquery table alias
+     * @return a builder instance of the class
+     */
+    public static Query from(Query subquery, String alias) {
+        StringJoiner joiner = new StringJoiner("", "(", ")");
+        joiner.add(subquery.getSql());
+        String str = joiner + " AS " + alias;
+
+        return new Query(str);
     }
 
     /**
