@@ -451,4 +451,12 @@ public class QueryTest {
         String q = q1.getSql();
         Assert.assertEquals(expected, q);
     }
+
+    @Test
+    public void testSubQuery() {
+        String expected = "SELECT t1, t2 FROM (SELECT t1, t2 FROM test) AS t";
+        String q = Query.from("(SELECT t1, t2 FROM test) AS t").select("t1", "t2").getSql();
+
+        Assert.assertEquals(expected, q);
+    }
 }
