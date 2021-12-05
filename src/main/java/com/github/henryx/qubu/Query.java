@@ -275,6 +275,10 @@ public class Query {
         return this;
     }
 
+    public Query join(String table) {
+        return this;
+    }
+
     /**
      * getSql returns generated criterion
      *
