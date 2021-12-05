@@ -462,4 +462,15 @@ public class QueryTest {
         String q = q1.getSql();
         Assert.assertEquals(expected, q);
     }
+
+    @Test
+    public void testJoin() {
+        String expected = "SELECT t1, t2 FROM test1 JOIN test2 ON t3 = t2";
+
+        String q = Query.from("test1")
+                .select("t1", "t2")
+                .getSql();
+
+        Assert.assertEquals(expected, q);
+    }
 }
