@@ -475,4 +475,33 @@ public class QueryTest {
 
         Assert.assertEquals(expected, q);
     }
+
+    @Test
+    public void testJoinAnd() {
+        String expected = "SELECT t1, t2 FROM test1 JOIN test2 ON t3 = t2 AND t3 = 1";
+
+        String q = Query.from("test1")
+                .select("t1", "t2")
+                .join(Join.join("test2")
+                        .on(Criterion.eq("t3", "t2"))
+                        .on(Criterion.eq("t3", "1")))
+                .getSql();
+
+        Assert.assertEquals(expected, q);
+    }
+
+    @Test
+    public void testJoinMultiple() {
+        String expected = "SELECT t1, t2 FROM test1 JOIN test2 ON t3 = t2 JOIN test3 ON t4 = t1";
+
+        String q = Query.from("test1")
+                .select("t1", "t2")
+                .join(Join.join("test2")
+                        .on(Criterion.eq("t3", "t2")))
+                .join(Join.join("test3")
+                        .on(Criterion.eq("t4", "t1")))
+                .getSql();
+
+        Assert.assertEquals(expected, q);
+    }
 }
