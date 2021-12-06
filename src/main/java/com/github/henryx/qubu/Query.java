@@ -40,6 +40,13 @@ public class Query {
         String query = this.columns.stream().collect(Collectors.joining(", ", "SELECT ", " FROM "));
         query += String.join(", ", this.from);
 
+        if (!this.joins.isEmpty()) {
+            StringJoiner joiner = new StringJoiner(" ");
+            this.joins.forEach(join -> joiner.add(join.getSql()));
+
+            query += " " + joiner;
+        }
+
         if (!this.whereCriteria.isEmpty()) {
             StringJoiner joiner = new StringJoiner(" ");
             this.whereCriteria.forEach(criterion -> {
