@@ -7,6 +7,7 @@ public class Query {
     private final List<String> from;
     private final List<Criterion> whereCriteria;
     private final List<Criterion> havingCriteria;
+    private final List<Join> joins;
     private final List<String> groupBy;
     private final List<String> orderBy;
     private final List<String> union;
@@ -17,13 +18,13 @@ public class Query {
     private Integer offset;
     private Boolean unionAll;
 
-
     private Query(String... tables) {
         this.from = Arrays.asList(tables);
         this.whereCriteria = new ArrayList<>();
         this.havingCriteria = new ArrayList<>();
         this.groupBy = new ArrayList<>();
         this.orderBy = new ArrayList<>();
+        this.joins = new ArrayList<>();
 
         this.union = new ArrayList<>();
         this.intersect = new ArrayList<>();
@@ -128,7 +129,7 @@ public class Query {
      * Sets the subquery used to select data. This is the entry point
      *
      * @param subquery Sets the subquery
-     * @param alias Sets the subquery table alias
+     * @param alias    Sets the subquery table alias
      * @return a builder instance of the class
      */
     public static Query from(Query subquery, String alias) {
@@ -155,6 +156,7 @@ public class Query {
     /**
      * Where sets the query filters conditions
      *
+     * @param criterion sets a criterion used in WHERE clause
      * @return a builder instance of the class
      */
     public Query where(Criterion criterion) {
@@ -178,7 +180,7 @@ public class Query {
     /**
      * Having sets criteria for HAVING clause
      *
-     * @param criterion sets a criverion used in HAVING clause
+     * @param criterion sets a criterion used in HAVING clause
      * @return a builder instance of the class
      */
     public Query having(Criterion criterion) {
@@ -275,7 +277,15 @@ public class Query {
         return this;
     }
 
-    public Query join(String table) {
+    /**
+     * join permits to sets JOIN clause in query
+     *
+     * @param join a Join object that represents the JOIN
+     * @return a builder instance of the class
+     */
+    public Query join(Join join) {
+        this.joins.add(join);
+
         return this;
     }
 
