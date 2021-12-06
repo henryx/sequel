@@ -469,6 +469,8 @@ public class QueryTest {
 
         String q = Query.from("test1")
                 .select("t1", "t2")
+                .join(Join.join("test2")
+                        .on(Criterion.eq("t3", "t2")))
                 .getSql();
 
         Assert.assertEquals(expected, q);
