@@ -506,12 +506,12 @@ public class QueryTest {
     }
 
     @Test
-    public void testInnerJoin() {
+    public void testJoinType() {
         String expected = "SELECT t1, t2 FROM test1 INNER JOIN test2 ON t3 = t2";
 
         String q = Query.from("test1")
                 .select("t1", "t2")
-                .join(Join.join("test2")
+                .join(Join.join("test2", JoinType.INNER)
                         .on(Criterion.eq("t3", "t2")))
                 .getSql();
 
