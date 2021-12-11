@@ -2,13 +2,20 @@ package com.github.henryx.qubu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.StringJoiner;
 
 public class Join {
     private final String table;
+    private final String joinType;
     private final List<Criterion> criteria;
 
-    private Join(String table) {
+    private Join(String table, JoinType joinType) {
+        if (Objects.equals(joinType, JoinType.NO)) {
+            this.joinType = "JOIN";
+        } else {
+            this.joinType = joinType + " JOIN";
+        }
         this.criteria = new ArrayList<>();
 
         this.table = table;
@@ -18,7 +25,7 @@ public class Join {
         StringJoiner joiner = new StringJoiner(" ");
         int counter = 0;
 
-        joiner.add("JOIN").add(this.table).add("ON");
+        joiner.add(this.joinType).add(this.table).add("ON");
         for (Criterion criterion : this.criteria) {
             if (counter != 0) {
                 joiner.add(criterion.getMethod());
@@ -49,7 +56,18 @@ public class Join {
      * @return a builder instance of the class
      */
     public static Join join(String table) {
-        return new Join(table);
+        return new Join(table, JoinType.NO);
+    }
+
+    /**
+     * join sets table used in JOIN operation. This is the entry point
+     *
+     * @param table Sets the table name
+     * @param joinType Sets the join type used in JOIN operation
+     * @return a builder instance of the class
+     */
+    public static Join join(String table, JoinType joinType) {
+        return new Join(table, joinType);
     }
 
     /**
