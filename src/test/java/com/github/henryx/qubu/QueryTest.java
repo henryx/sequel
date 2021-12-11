@@ -504,4 +504,17 @@ public class QueryTest {
 
         Assert.assertEquals(expected, q);
     }
+
+    @Test
+    public void testInnerJoin() {
+        String expected = "SELECT t1, t2 FROM test1 INNER JOIN test2 ON t3 = t2";
+
+        String q = Query.from("test1")
+                .select("t1", "t2")
+                .join(Join.join("test2")
+                        .on(Criterion.eq("t3", "t2")))
+                .getSql();
+
+        Assert.assertEquals(expected, q);
+    }
 }
