@@ -447,12 +447,14 @@ FROM test OFFSET 3 ROWS FETCH FIRST 10 ROWS ONLY;
 Query query1=Query.from("test1")
         .select("t1","t2");
 
-Query query2=Query.from("test2")
+        Query query2=Query.from("test2")
         .select("t3","t4");
 
-String query=query1.union(query2).getSql();
+        String query=query1.union(query2).getSql();
 ```
+
 Generated query is:
+
 ```sql
 SELECT t1, t2
 FROM test1
@@ -462,16 +464,19 @@ FROM test2
 ```
 
 In the same way, support of `UNION ALL` is made by `unionAll()` method:
+
 ```java
 Query query1=Query.from("test1")
         .select("t1","t2");
 
-Query query2=Query.from("test2")
+        Query query2=Query.from("test2")
         .select("t3","t4");
 
-String query=query1.unionAll(query2).getSql();
+        String query=query1.unionAll(query2).getSql();
 ```
+
 Generated query is:
+
 ```sql
 SELECT t1, t2
 FROM test1
@@ -488,12 +493,14 @@ FROM test2
 Query query1=Query.from("test1")
         .select("t1","t2");
 
-Query query2=Query.from("test2")
+        Query query2=Query.from("test2")
         .select("t3","t4");
 
-String query=query1.intersect(query2).getSql();
+        String query=query1.intersect(query2).getSql();
 ```
+
 Generated query is:
+
 ```sql
 SELECT t1, t2
 FROM test1
@@ -510,16 +517,57 @@ FROM test2
 Query query1=Query.from("test1")
         .select("t1","t2");
 
-Query query2=Query.from("test2")
+        Query query2=Query.from("test2")
         .select("t3","t4");
 
-String query=query1.except(query2).getSql();
+        String query=query1.except(query2).getSql();
 ```
+
 Generated query is:
+
 ```sql
 SELECT t1, t2
 FROM test1
 EXCEPT
 SELECT t3, t4
 FROM test2
+```
+
+## Joins
+
+Joins can be created via `Join` builder class:
+
+```java
+String query=Query.from("test1")
+        .select("t1","t2")
+        .join(Join.join("test2")
+        .on(Criterion.eq("t3","t2"))
+        .getSql();
+```
+
+Generated query is:
+
+```sql
+SELECT t1, t2
+FROM test1
+         JOIN test2 ON t3 = t2
+```
+
+It is possible to specify the JOIN type:
+
+```java
+String query=Query.from("test1")
+        .select("t1","t2")
+        .join(Join.join("test2",JoinType.INNER)
+        .on(Criterion.eq("t3","t2")))
+        .on(Criterion.eq("t3","1")))
+        .getSql();
+```
+
+That generate this query:
+
+```sql
+SELECT t1, t2
+FROM test1
+         INNER JOIN test2 ON t3 = t2 AND t3 = 1
 ```
