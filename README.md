@@ -66,7 +66,7 @@ FROM test
 Query can be ordered using `Query.orderBy` method:
 
 ```java
-String q=String query=Query.from("test")
+String query=Query.from("test")
         .select("t1","t2")
         .orderBy("t1")
         .getSql();
@@ -134,7 +134,7 @@ WHERE t1 = t2
 `Criterion` class implements also a criterion method used to apply filter. Criterion method can be `AND` or `OR`:
 
 ```java
-String q=String query=Query.from("test")
+String query=Query.from("test")
         .where(Criterion.eq("t1","?"))
         .where(Criterion.eq("t1","?").method(Criterion.OR))
         .where(Criterion.neq("t2","?").method(Criterion.AND))
