@@ -62,7 +62,7 @@ public class Join {
     /**
      * join sets table used in JOIN operation. This is the entry point
      *
-     * @param table Sets the table name
+     * @param table    Sets the table name
      * @param joinType Sets the join type used in JOIN operation
      * @return a builder instance of the class
      */

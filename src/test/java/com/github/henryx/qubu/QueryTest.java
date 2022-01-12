@@ -415,8 +415,8 @@ public class QueryTest {
     @Test
     public void testUnion() {
         String expected = "SELECT t1, t2 FROM test1 UNION SELECT t3, t4 FROM test2";
-        Query q2 = Query.from("test2").select("t3", "t4");
-        Query q1 = Query.from("test1").select("t1", "t2").union(q2);
+        Query.Select q2 = Query.from("test2").select("t3", "t4");
+        Query.Select q1 = Query.from("test1").select("t1", "t2").union(q2);
 
         String q = q1.getSql();
         Assert.assertEquals(expected, q);
@@ -425,8 +425,8 @@ public class QueryTest {
     @Test
     public void testUnionAll() {
         String expected = "SELECT t1, t2 FROM test1 UNION ALL SELECT t3, t4 FROM test2";
-        Query q2 = Query.from("test2").select("t3", "t4");
-        Query q1 = Query.from("test1").select("t1", "t2").unionAll(q2);
+        Query.Select q2 = Query.from("test2").select("t3", "t4");
+        Query.Select q1 = Query.from("test1").select("t1", "t2").unionAll(q2);
 
         String q = q1.getSql();
         Assert.assertEquals(expected, q);
@@ -435,8 +435,8 @@ public class QueryTest {
     @Test
     public void testIntersect() {
         String expected = "SELECT t1, t2 FROM test1 INTERSECT SELECT t3, t4 FROM test2";
-        Query q2 = Query.from("test2").select("t3", "t4");
-        Query q1 = Query.from("test1").select("t1", "t2").intersect(q2);
+        Query.Select q2 = Query.from("test2").select("t3", "t4");
+        Query.Select q1 = Query.from("test1").select("t1", "t2").intersect(q2);
 
         String q = q1.getSql();
         Assert.assertEquals(expected, q);
@@ -445,8 +445,8 @@ public class QueryTest {
     @Test
     public void testExcept() {
         String expected = "SELECT t1, t2 FROM test1 EXCEPT SELECT t3, t4 FROM test2";
-        Query q2 = Query.from("test2").select("t3", "t4");
-        Query q1 = Query.from("test1").select("t1", "t2").except(q2);
+        Query.Select q2 = Query.from("test2").select("t3", "t4");
+        Query.Select q1 = Query.from("test1").select("t1", "t2").except(q2);
 
         String q = q1.getSql();
         Assert.assertEquals(expected, q);
@@ -456,8 +456,8 @@ public class QueryTest {
     public void testSubQuery() {
         String expected = "SELECT t1, t2 FROM (SELECT t1, t2 FROM test) AS t";
 
-        Query q2 = Query.from("test").select("t1", "t2");
-        Query q1 = Query.from(q2, "t").select("t1", "t2");
+        Query.Select q2 = Query.from("test").select("t1", "t2");
+        Query.Select q1 = Query.from(q2, "t").select("t1", "t2");
 
         String q = q1.getSql();
         Assert.assertEquals(expected, q);
