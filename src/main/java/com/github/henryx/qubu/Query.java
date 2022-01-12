@@ -29,6 +29,16 @@ public class Query {
         return new Select(str);
     }
 
+    /**
+     * Sets the table used to insert data. This is the entry point
+     *
+     * @param table The table name
+     * @return an Insert builder instance of the class
+     */
+    public static Insert into(String table) {
+        return new Insert(table);
+    }
+
     public static class Select {
         private final List<String> from;
         private final List<Criterion> whereCriteria;
@@ -298,9 +308,42 @@ public class Query {
         }
 
         /**
-         * getSql returns generated criterion
+         * getSql returns generated query
          *
          * @return a String that represents the generated query
+         */
+        public String getSql() {
+            return this.build();
+        }
+
+        @Override
+        public String toString() {
+            return this.build();
+        }
+    }
+
+    public static class Insert {
+        public Insert(String table) {
+        }
+
+        private String build() {
+            return "";
+        }
+
+        /**
+         * This method add values in insert query
+         *
+         * @param values A list of the values used in insert
+         * @return a builder instance of the class
+         */
+        public Insert insert(String... values) {
+            return this;
+        }
+
+        /**
+         * getSql returns generated insert
+         *
+         * @return a String that represents the generated insert
          */
         public String getSql() {
             return this.build();
