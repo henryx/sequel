@@ -332,7 +332,19 @@ public class Query {
         }
 
         private String build() {
-            return "";
+            if (this.values.isEmpty()) {
+                return "";
+            }
+
+            String insert = new StringJoiner(" ")
+                    .add("INSERT INTO")
+                    .add(this.table)
+                    .add("VALUES").toString();
+
+            String values = this.values.stream().collect(Collectors.joining(", ", "(", ")"));
+            insert += " " + values;
+
+            return insert;
         }
 
         /**
