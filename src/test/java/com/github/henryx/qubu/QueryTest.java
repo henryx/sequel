@@ -562,4 +562,15 @@ public class QueryTest {
 
         Assert.assertEquals(expected, q);
     }
+
+    @Test
+    public void testInsertSubquery() {
+        String expected = "INSERT INTO test1 (t1, t2) SELECT t3, t4 FROM test2";
+
+        String sql = Query.into("test1")
+                .insert("?", "?")
+                .getSql();
+
+        Assert.assertEquals(expected, sql);
+    }
 }
