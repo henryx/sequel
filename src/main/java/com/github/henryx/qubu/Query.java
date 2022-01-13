@@ -338,15 +338,26 @@ public class Query {
                 return "";
             }
 
-            String insert = new StringJoiner(" ")
+            if (!this.columns.isEmpty() && this.columns.size() != this.values.size()) {
+                return "";
+            }
+
+            StringJoiner insert = new StringJoiner(" ")
                     .add("INSERT INTO")
-                    .add(this.table)
-                    .add("VALUES").toString();
+                    .add(this.table);
 
-            String values = this.values.stream().collect(Collectors.joining(", ", "(", ")"));
-            insert += " " + values;
+            if (!this.columns.isEmpty()) {
+                StringJoiner joiner = new StringJoiner(", ", "(", ")");
+                this.columns.forEach(joiner::add);
+                insert.add(joiner.toString());
+            }
+            insert.add("VALUES");
 
-            return insert;
+            StringJoiner joiner = new StringJoiner(", ", "(", ")");
+            this.values.forEach(joiner::add);
+            insert.add(joiner.toString());
+
+            return insert.toString();
         }
 
         /**
