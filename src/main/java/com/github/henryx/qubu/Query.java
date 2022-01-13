@@ -323,7 +323,10 @@ public class Query {
     }
 
     public static class Insert {
+        private final String table;
+
         public Insert(String table) {
+            this.table = table;
         }
 
         private String build() {
