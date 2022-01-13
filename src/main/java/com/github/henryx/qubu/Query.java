@@ -324,11 +324,13 @@ public class Query {
 
     public static class Insert {
         private final String table;
+        private final List<String> columns;
         private final List<String> values;
 
         public Insert(String table) {
             this.table = table;
             this.values = new ArrayList<>();
+            this.columns = new ArrayList<>();
         }
 
         private String build() {
@@ -348,7 +350,19 @@ public class Query {
         }
 
         /**
-         * This method add values in insert query
+         * This method add columns in insert statement
+         *
+         * @param columns A list of the columns used in insert
+         * @return a builder instance of the class
+         */
+        public Insert columns(String... columns) {
+            this.columns.addAll(Arrays.asList(columns));
+
+            return this;
+        }
+
+        /**
+         * This method add values in insert statement
          *
          * @param values A list of the values used in insert
          * @return a builder instance of the class
