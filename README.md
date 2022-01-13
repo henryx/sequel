@@ -41,7 +41,7 @@ It is possible to add the library as dependency bay adding this in your `pom.xml
 <dependency>
     <groupId>com.github.henryx</groupId>
     <artifactId>qubu</artifactId>
-    <version>0.11.0</version>
+    <version>0.12.0</version>
 </dependency>
 </dependencies>
 ```
