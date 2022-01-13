@@ -335,7 +335,7 @@ public class Query {
         }
 
         private String build() {
-            if (this.values.isEmpty()) {
+            if (this.values.isEmpty() || Objects.isNull(this.query)) {
                 return "";
             }
 
@@ -352,11 +352,16 @@ public class Query {
                 this.columns.forEach(joiner::add);
                 insert.add(joiner.toString());
             }
-            insert.add("VALUES");
 
-            StringJoiner joiner = new StringJoiner(", ", "(", ")");
-            this.values.forEach(joiner::add);
-            insert.add(joiner.toString());
+            if (Objects.isNull(this.query)) {
+                insert.add("VALUES");
+
+                StringJoiner joiner = new StringJoiner(", ", "(", ")");
+                this.values.forEach(joiner::add);
+                insert.add(joiner.toString());
+            } else {
+                insert.add(this.query.getSql());
+            }
 
             return insert.toString();
         }
