@@ -564,10 +564,13 @@ public class QueryTest {
     }
 
     @Test
-    public void testInsertSubquery() {
+    public void testInsertQuery() {
         String expected = "INSERT INTO test1 (t1, t2) SELECT t3, t4 FROM test2";
 
+        Query.Select query = Query.from("test2").select("t3", "t4");
         String sql = Query.into("test1")
+                .columns("t1", "t2")
+                .select(query)
                 .insert("?", "?")
                 .getSql();
 
