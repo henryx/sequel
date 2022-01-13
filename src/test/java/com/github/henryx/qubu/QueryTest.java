@@ -520,7 +520,7 @@ public class QueryTest {
 
     @Test
     public void testInsert() {
-        String expected = "INSERT INTO test1 VALUES(?, ?)";
+        String expected = "INSERT INTO test1 VALUES (?, ?)";
 
         String q = Query.into("test1")
                 .insert("?", "?")
