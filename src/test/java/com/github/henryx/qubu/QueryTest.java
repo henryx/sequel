@@ -529,5 +529,14 @@ public class QueryTest {
         Assert.assertEquals(expected, q);
     }
 
+    @Test
+    public void testInsertColumns() {
+        String expected = "INSERT INTO test1 (t1, t2) VALUES (?, ?)";
 
+        String q = Query.into("test1")
+                .insert("?", "?")
+                .getSql();
+
+        Assert.assertEquals(expected, q);
+    }
 }
