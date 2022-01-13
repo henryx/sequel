@@ -590,11 +590,11 @@ INSERT INTO test1 VALUES (?, ?)
 
 [f]: @formatter:on
 
-It is possible to specify columns in generated statement:
+It is also possible to specify columns in generated statement:
 
 ```java
 String q=Query.into("test1")
-        .columns("t1", "t2")
+        .columns("t1","t2")
         .insert("?","?")
         .getSql();
 ```
@@ -605,4 +605,17 @@ String q=Query.into("test1")
 INSERT INTO test1 (t1, t2) VALUES (?, ?)
 ```
 
+Insert using query is suppoerted too:
+
+```java
+Query.Select query=Query.from("test2").select("t3","t4");
+String sql=Query.into("test1")
+        .columns("t1","t2")
+        .select(query)
+        .insert("?","?")
+        .getSql();
+```
+```sql
+INSERT INTO test1 (t1, t2) SELECT t3, t4 FROM test2
+```
 [f]: @formatter:on
