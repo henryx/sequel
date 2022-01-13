@@ -326,6 +326,7 @@ public class Query {
         private final String table;
         private final List<String> columns;
         private final List<String> values;
+        private Select query;
 
         public Insert(String table) {
             this.table = table;
@@ -380,6 +381,12 @@ public class Query {
          */
         public Insert insert(String... values) {
             this.values.addAll(Arrays.asList(values));
+
+            return this;
+        }
+
+        public Insert select(Select query) {
+            this.query = query;
 
             return this;
         }
