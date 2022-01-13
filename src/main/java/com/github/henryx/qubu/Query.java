@@ -324,9 +324,11 @@ public class Query {
 
     public static class Insert {
         private final String table;
+        private final List<String> values;
 
         public Insert(String table) {
             this.table = table;
+            this.values = new ArrayList<>();
         }
 
         private String build() {
@@ -340,6 +342,8 @@ public class Query {
          * @return a builder instance of the class
          */
         public Insert insert(String... values) {
+            this.values.addAll(Arrays.asList(values));
+
             return this;
         }
 
