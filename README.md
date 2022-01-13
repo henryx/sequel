@@ -571,3 +571,21 @@ SELECT t1, t2
 FROM test1
          INNER JOIN test2 ON t3 = t2 AND t3 = 1
 ```
+
+## Insert
+
+It is possible to generate insert statements:
+
+```java
+String q=Query.into("test1")
+        .insert("?","?")
+        .getSql();
+```
+
+[f]: @formatter:off
+
+```sql
+INSERT INTO test1 VALUES (?, ?)
+```
+
+[f]: @formatter:on
