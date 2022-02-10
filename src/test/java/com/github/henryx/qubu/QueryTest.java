@@ -529,7 +529,7 @@ public class QueryTest {
         Assert.assertEquals(expected, q);
     }
 
-    @Test
+    @Test(expected = ValueMismatchException.class)
     public void testInsertFail() {
         String expected = "";
 
