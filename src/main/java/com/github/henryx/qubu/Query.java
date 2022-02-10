@@ -335,8 +335,8 @@ public class Query {
         }
 
         private String build() {
-            if (this.values.isEmpty() || Objects.isNull(this.query)) {
-                return "";
+            if (this.values.isEmpty() && Objects.isNull(this.query)) {
+                throw new ValueMismatchException("Cannot build INSERT statement. No query or no values are passed");
             }
 
             if (!this.columns.isEmpty() && this.columns.size() != this.values.size()) {
