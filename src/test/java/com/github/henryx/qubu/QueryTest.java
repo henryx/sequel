@@ -531,12 +531,9 @@ public class QueryTest {
 
     @Test(expected = ValueMismatchException.class)
     public void testInsertFail() {
-        String expected = "";
-
+        // Test thrown an exception because no subquery or no values are passed
         String q = Query.into("test1")
                 .getSql();
-
-        Assert.assertEquals(expected, q);
     }
 
     @Test
@@ -551,16 +548,13 @@ public class QueryTest {
         Assert.assertEquals(expected, q);
     }
 
-    @Test
+    @Test(expected = ValueMismatchException.class)
     public void testInsertColumnsDifferValues() {
-        String expected = "";
-
+        // Test thrown an exception because columns and values differs
         String q = Query.into("test1")
                 .columns("t1")
                 .insert("?", "?")
                 .getSql();
-
-        Assert.assertEquals(expected, q);
     }
 
     @Test
