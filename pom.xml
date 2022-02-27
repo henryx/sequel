@@ -6,7 +6,7 @@
 
     <groupId>com.github.henryx</groupId>
     <artifactId>qubu</artifactId>
-    <version>0.12.1</version>
+    <version>0.12.2</version>
 
     <name>qubu</name>
     <description>QuBu: a Java QUery BUilder</description>
