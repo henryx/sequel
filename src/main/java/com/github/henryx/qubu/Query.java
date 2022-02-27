@@ -340,7 +340,7 @@ public class Query {
             }
 
             if (!this.columns.isEmpty() && this.columns.size() != this.values.size()) {
-                return "";
+                throw new ValueMismatchException("Cannot build INSERT statement. Columns number differs from values number");
             }
 
             StringJoiner insert = new StringJoiner(" ")
