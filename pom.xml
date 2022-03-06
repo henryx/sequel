@@ -6,7 +6,7 @@
 
     <groupId>com.github.henryx</groupId>
     <artifactId>sequel</artifactId>
-    <version>0.12.2</version>
+    <version>0.20.0</version>
 
     <name>sequel</name>
     <description>Sequel: a Java query builder</description>
