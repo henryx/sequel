@@ -1,9 +1,9 @@
-package com.github.henryx.qubu;
+package com.github.henryx.sequel;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Query {
+public class Sequel {
     /**
      * Sets the table where we select data. This is the entry point
      *

@@ -1,4 +1,4 @@
-package com.github.henryx.qubu;
+package com.github.henryx.sequel;
 
 import java.util.StringJoiner;
 

@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.henryx</groupId>
-    <artifactId>qubu</artifactId>
+    <artifactId>sequel</artifactId>
     <version>0.12.2</version>
 
-    <name>qubu</name>
-    <description>QuBu: a Java QUery BUilder</description>
-    <url>https://github.com/henryx/qubu</url>
+    <name>sequel</name>
+    <description>Sequel: a Java query builder</description>
+    <url>https://github.com/henryx/sequel</url>
 
     <licenses>
         <license>
@@ -29,7 +29,7 @@
     </developers>
 
     <scm>
-        <developerConnection>scm:git:ssh://github.com/henryx/qubu.git</developerConnection>
+        <developerConnection>scm:git:ssh://github.com/henryx/sequel.git</developerConnection>
         <connection>${project.scm.developerConnection}</connection>
         <url>${project.url}</url>
     </scm>

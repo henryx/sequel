@@ -1,8 +1,8 @@
-# QuBu
+# Sequel
 
-[![](https://jitpack.io/v/henryx/qubu.svg)](https://jitpack.io/#henryx/qubu)
+[![](https://jitpack.io/v/henryx/sequel.svg)](https://jitpack.io/#henryx/sequel)
 
-QUery BUilder is a Java query builder inspired from [PyPika](https://github.com/kayak/pypika). It supports:
+Sequel query builder is a Java query builder inspired from [PyPika](https://github.com/kayak/pypika). It supports:
 
 - Simple query filters like equal, not equal
 - Range filters like BETWEEN, IN, NOT IN
@@ -40,8 +40,8 @@ It is possible to add the library as dependency bay adding this in your `pom.xml
 <dependencies>
 <dependency>
     <groupId>com.github.henryx</groupId>
-    <artifactId>qubu</artifactId>
-    <version>0.12.0</version>
+    <artifactId>sequel</artifactId>
+    <version>0.20.0</version>
 </dependency>
 </dependencies>
 ```
